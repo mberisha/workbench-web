@@ -1,0 +1,136 @@
+<div class="container">
+  <div class="row">
+    <div class="float-left"><h2 class="f-25">Schaltwerk</h2></div>
+    <div class="float-right">
+      <button class="small-button m-right-10">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <button class="small-button">
+        <mat-icon class="material-icons-outlined">local_printshop</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="float-left">
+      <div class="row-display-flex">
+        <button class="small-button m-right-30">
+          <mat-icon>qr_code_scanner</mat-icon>
+        </button>
+        <div class="barcode">
+          <span class="font-small-size">Artikelnummer/ Arbeitsschritt scannen</span> <br>
+          <button class="button-with-barcode"><i class="fa fa-barcode fa-lg"></i>
+          </button>
+        </div>
+      </div>
+      <div class="row info">
+        Art-Nr:FR-M21S-44 <br>
+        PA-Nr: P-001<br>
+        AUF Nummer:<br>
+      </div>
+      <div class="row div-with-buttons">
+        <button>Info</button>
+        <span>Video</span>
+        <span>Dokumente</span>
+      </div>
+    </div>
+    <div class="float-right">
+      <img src="../assets/images/vectorpaint.svg">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="float-left">
+      <div class="row bold">Schritt 1</div>
+      <div class="row schritt">
+        Lorem Ipsum ist ein einfacher Demo-Text für die Print- und <br>
+        Schriftindustrie. Lorem Ipsum ist in der Industrie bereits der <br>
+        Standard Demo-Text seit 1500, als ein unbekannter Schriftstell <br>
+        eine Hand voll Wörter nahm und diese
+      </div>
+      <hr>
+    </div>
+    <div class="float-right">
+      <div class="row">
+        <button class="hilfe-button m-right-8">
+          <mat-icon class="material-icons-outlined">call</mat-icon>
+          Hilfe
+        </button>
+        <button class="deffekt-button">
+          <mat-icon class="material-icons-outlined">report_problem</mat-icon>
+          Deffekt
+        </button>
+      </div>
+      <div class="row next-previous">
+        <button class="next-button m-right-3">
+          <mat-icon class="material-icons-outlined">arrow_back_ios</mat-icon>
+        </button>
+        <button class="next-button">
+          <mat-icon class="material-icons-outlined">arrow_forward_ios</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <h3 class="bold">Stücklistenkomponenten</h3>
+  </div>
+  <mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="artikelnum">
+      <mat-header-cell *matHeaderCellDef> Artikelnum..</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.artikelnum}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="artikelname">
+      <mat-header-cell *matHeaderCellDef> Artikelname</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.artikelname}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="anhang">
+      <mat-header-cell *matHeaderCellDef> Anhang</mat-header-cell>
+      <mat-cell *matCellDef="let row; let i=index">
+        <button *ngIf="i==3" class="small-button-without-box-shadow">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="gebucht">
+      <mat-header-cell *matHeaderCellDef> Gebucht</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="bold"> {{row.gebucht}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="gesamt">
+      <mat-header-cell *matHeaderCellDef> Gesamt</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="bold"> {{row.gesamt}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="unbestat">
+      <mat-header-cell *matHeaderCellDef> Unbestät..</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="bold">  {{row.unbestat}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actionButtons">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button class="small-button-without-box-shadow m-5 bold">+</button>
+        <button class="small-button-without-box-shadow bold">-</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row
+      *matHeaderRowDef="['artikelnum', 'artikelname', 'anhang', 'gebucht', 'gesamt', 'unbestat', 'actionButtons']"></mat-header-row>
+    <mat-row
+      *matRowDef="let row; columns: ['artikelnum', 'artikelname', 'anhang', 'gebucht', 'gesamt', 'unbestat', 'actionButtons']"></mat-row>
+  </mat-table>
+  <div class="row">
+    <div class="float-left">
+      <button class="normal-button">Verbinden</button>
+      <button class="normal-button m-left-10">Zerlegen</button>
+    </div>
+    <div class="float-right">
+      <button class="normal-button">Bestätigen</button>
+    </div>
+  </div>
+  <br>
+  <br>
+</div>
