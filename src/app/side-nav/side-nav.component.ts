@@ -1,12 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {MatSidenav} from "@angular/material/sidenav";
+import Keyboard from "simple-keyboard";
 
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
-  styleUrls: ['./side-nav.component.scss']
+  styleUrls: ['./side-nav.component.scss'],
 })
-export class SideNavComponent implements OnInit {
+export class SideNavComponent implements OnInit, AfterViewInit {
   @ViewChild('sidenav') sidenav: MatSidenav | undefined;
 
   expandSubMenu: boolean = false;
@@ -16,6 +17,15 @@ export class SideNavComponent implements OnInit {
   subMenuItemIndex: any;
   showSubMenuContent: boolean = false;
   subMenuSideNavItem: any;
+  time = new Date();
+  value = "";
+  keyboard: any;
+
+  isExpanded = true;
+  showSubmenu: boolean = false;
+  isShowing = false;
+  showSubSubMenu: boolean = false;
+  showVirtualKeyboard: boolean = false;
   sideNavItems = [
     {
       name: 'Dashboard',
@@ -149,15 +159,21 @@ export class SideNavComponent implements OnInit {
   ]
 
   constructor() {
+    setInterval(() => {
+      this.time = new Date()
+    }, 1000)
   }
 
   ngOnInit() {
   }
 
-  isExpanded = true;
-  showSubmenu: boolean = false;
-  isShowing = false;
-  showSubSubMenu: boolean = false;
+  ngAfterViewInit() {
+    this.keyboard = new Keyboard({
+      onChange: input => this.onChange(input),
+      onKeyPress: (button: any) => this.onKeyPress(button),
+      theme: "hg-theme-default myTheme1"
+    });
+  }
 
   mouseenter() {
     if (!this.isExpanded) {
@@ -213,5 +229,37 @@ export class SideNavComponent implements OnInit {
       }
     });
     this.subMenuSideNavItem = subMenuSideNavItem;
+  }
+
+  onChange = (input: string) => {
+    this.value = input;
+    console.log("Input changed", input);
+  };
+
+  onKeyPress = (button: string) => {
+    console.log("Button pressed", button);
+
+    /**
+     * If you want to handle the shift and caps lock buttons
+     */
+    if (button === "{shift}" || button === "{lock}") this.handleShift();
+  };
+
+  onInputChange = (event: any) => {
+    this.keyboard.setInput(event.target.value);
+  };
+
+  handleShift = () => {
+    let currentLayout = this.keyboard.options.layoutName;
+    let shiftToggle = currentLayout === "default" ? "shift" : "default";
+
+    this.keyboard.setOptions({
+      layoutName: shiftToggle
+    });
+  };
+
+  virtualKeyboard() {
+    this.showVirtualKeyboard = !this.showVirtualKeyboard;
+    console.log(this.showVirtualKeyboard)
   }
 }

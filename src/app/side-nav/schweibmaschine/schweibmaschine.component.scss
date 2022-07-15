@@ -255,3 +255,8 @@ img {
   margin-right: 40px;
   height: 185px;
 }
+
+mat-cell:last-of-type{
+  justify-content: end;
+  padding-right: 10px !important;
+}

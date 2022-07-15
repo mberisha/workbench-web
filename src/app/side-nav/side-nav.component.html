@@ -2,9 +2,9 @@
   <mat-sidenav #sidenav class="sideNav" mode="side" opened="true" (mouseenter)="mouseenter()"
                (mouseleave)="mouseleave()">
     <div class="text-center h-25">
-      <button mat-icon-button (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
+      <!--      <button mat-icon-button (click)="sidenav.toggle()">-->
+      <!--        <mat-icon>menu</mat-icon>-->
+      <!--      </button>-->
       Workbench</div>
     <mat-nav-list>
       <ng-container *ngFor="let sideNavItem of sideNavItems; let i=index">
@@ -36,10 +36,15 @@
   <div class="example-sidenav-content"
        *ngIf="showSubMenuContent && sideNavItems[sideNavItemIndex].subMenuItems[subMenuItemIndex].isSelected">
     <mat-sidenav-container class="example-container" style="width: 100%" autosize>
-      <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()"
-                   (mouseleave)="mouseleave()">
+      <mat-sidenav  class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()"
+                    (mouseleave)="mouseleave()">
         <div class="submenu-sidenav-title">
-          <h2>Arbeitsschrite</h2>
+          <div>
+            <!--          <button mat-icon-button (click)="sidenav.toggle()">-->
+            <mat-icon class="toggle-icon" (click)="sidenav.toggle()">menu</mat-icon>
+            <!--          </button>-->
+            <h2 style="display: inline">Arbeitsschrite </h2>
+          </div>
           <div>
             <span>FORTSCHRITT: 67%</span>
             <span>01:16:22</span>
@@ -47,10 +52,10 @@
           <mat-progress-bar  mode="determinate" value="67"></mat-progress-bar>
         </div>
         <mat-nav-list
-          *ngFor="let subMenuSideNavItem of sideNavItems[sideNavItemIndex].subMenuItems[subMenuItemIndex]?.subMenuSideNavItems">
+                *ngFor="let subMenuSideNavItem of sideNavItems[sideNavItemIndex].subMenuItems[subMenuItemIndex]?.subMenuSideNavItems">
           <mat-list-item (click)="showSubmenu = !showSubmenu" style="color: black !important;" [ngClass]="{'sideNavItem-name' : subMenuSideNavItem?.isSelected}">
             <span class="full-width" *ngIf="isExpanded || isShowing">
-               <span [matBadgeHidden]="!subMenuSideNavItem.count" matBadge="{{subMenuSideNavItem?.count}}"
+               <span [matBadgeHidden]="!subMenuSideNavItem.count"  matBadge="{{subMenuSideNavItem?.count}}"
                      color="primary" matBadgeOverlap="false">
                </span>
               <span style="margin-left: 25px" (click)="onClickSubMenuSideNav(subMenuSideNavItem)">{{subMenuSideNavItem?.name}}</span>
@@ -58,8 +63,8 @@
           </mat-list-item>
         </mat-nav-list>
       </mat-sidenav>
-<!-- content of selected subMenuSideNavItem -->
-        <app-schweibmaschine *ngIf="subMenuSideNavItem?.isSelected && (subMenuSideNavItem?.name ==='Schweißmaschine')"></app-schweibmaschine>
+      <!-- content of selected subMenuSideNavItem -->
+      <app-schweibmaschine *ngIf="subMenuSideNavItem?.isSelected && (subMenuSideNavItem?.name ==='Schweißmaschine')"></app-schweibmaschine>
     </mat-sidenav-container>
 
   </div>
@@ -68,6 +73,30 @@
 <mat-toolbar class="sideNav">
   <button class="login-button">
     <mat-icon>account_circle</mat-icon>
-  <span>Login</span>
+    <span>Login</span>
   </button>
+
+  <button class="small-button-without-box-shadow margin-left-30">
+    <mat-icon>logout</mat-icon>
+  </button>
+  <input class="search-toolbar" />
+
+  <button class="small-button-without-box-shadow margin-left-20" (click)="virtualKeyboard()">
+    <mat-icon>keyboard</mat-icon>
+  </button>
+
+  <button class="small-button-without-box-shadow margin-left-10">
+    <mat-icon>history</mat-icon>
+  </button>
+
+  <div class="current-time margin-left-20">  {{time   | date: "HH:mm:ss"}}</div>
 </mat-toolbar>
+
+<ng-container>
+
+  <div  [hidden]="!showVirtualKeyboard" style="text-align:center" class="simple-keyboard">
+    <input (input)="onInputChange($event)" class="input input-simple-keyboard" value={{value}} placeholder="Tap on the virtual keyboard to start" />
+    <div class="simple-keyboard"></div>
+  </div>
+
+</ng-container>
