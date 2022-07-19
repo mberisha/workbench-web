@@ -154,6 +154,7 @@ mat-header-row {
   max-height: 12px !important;
   height: 12px !important;
   min-height: 12px !important;
+  margin-top: 10px;
 }
 
 mat-header-cell {
@@ -259,4 +260,9 @@ img {
 mat-cell:last-of-type{
   justify-content: end;
   padding-right: 10px !important;
+}
+
+.table {
+  height: 260px;
+  overflow-y: scroll;
 }

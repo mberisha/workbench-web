@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { SideNavService } from '../side-nav.service';
 
 @Component({
   selector: 'app-schweibmaschine',
@@ -39,11 +40,19 @@ export class SchweibmaschineComponent implements OnInit {
       unbestät: 0
     }
   ]
-
-  constructor() {
+  workbenchItems: any[] = [];
+  constructor(public sideNavService: SideNavService) {
   }
 
   ngOnInit(): void {
+    this.getWorkbenchItems();
+  }
+
+  getWorkbenchItems(){
+   this.sideNavService.getWorkbench().subscribe(res=> {
+    this.workbenchItems = res;
+    console.log('workbench', this.workbenchItems);
+   })
   }
 
 }

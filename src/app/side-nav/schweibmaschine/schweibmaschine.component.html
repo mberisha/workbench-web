@@ -73,40 +73,47 @@
   <div class="row">
     <h3 class="bold">Stücklistenkomponenten</h3>
   </div>
-  <mat-table [dataSource]="dataSource">
+  <mat-table [dataSource]="workbenchItems" class="table">
 
     <ng-container matColumnDef="artikelnum">
-      <mat-header-cell *matHeaderCellDef> Artikelnum..</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.artikelnum}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef> Order ID</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.orderID}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="artikelname">
-      <mat-header-cell *matHeaderCellDef> Artikelname</mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.artikelname}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef> Step Group</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.stepGroup}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="anhang">
-      <mat-header-cell *matHeaderCellDef> Anhang</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Ress ID</mat-header-cell>
+      <mat-cell *matCellDef="let row; let i=index">
+          {{row.ressID}}
+      </mat-cell>
+    </ng-container>
+<!-- 
+    <ng-container matColumnDef="anhang">
+      <mat-header-cell *matHeaderCellDef> Ress ID</mat-header-cell>
       <mat-cell *matCellDef="let row; let i=index">
         <button *ngIf="i==3" class="small-button-without-box-shadow">
           <mat-icon>attach_file</mat-icon>
         </button>
       </mat-cell>
-    </ng-container>
+    </ng-container> -->
 
     <ng-container matColumnDef="gebucht">
-      <mat-header-cell *matHeaderCellDef> Gebucht</mat-header-cell>
-      <mat-cell *matCellDef="let row" class="bold"> {{row.gebucht}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef> Ress Type</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="bold"> {{row.ressType}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="gesamt">
-      <mat-header-cell *matHeaderCellDef> Gesamt</mat-header-cell>
-      <mat-cell *matCellDef="let row" class="bold"> {{row.gesamt}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef> Nr</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="bold"> {{row.nr}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="unbestat">
-      <mat-header-cell *matHeaderCellDef> Unbestät..</mat-header-cell>
-      <mat-cell *matCellDef="let row" class="bold">  {{row.unbestat}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef> Ressource Desc</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="bold">  {{row.ressourceDesc}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actionButtons">
@@ -118,7 +125,7 @@
     </ng-container>
 
     <mat-header-row
-      *matHeaderRowDef="['artikelnum', 'artikelname', 'anhang', 'gebucht', 'gesamt', 'unbestat', 'actionButtons']"></mat-header-row>
+      *matHeaderRowDef="['artikelnum', 'artikelname', 'anhang', 'gebucht', 'gesamt', 'unbestat', 'actionButtons']; sticky:true"></mat-header-row>
     <mat-row
       *matRowDef="let row; columns: ['artikelnum', 'artikelname', 'anhang', 'gebucht', 'gesamt', 'unbestat', 'actionButtons']"></mat-row>
   </mat-table>

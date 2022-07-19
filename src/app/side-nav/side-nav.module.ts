@@ -12,6 +12,8 @@ import {MatBadgeModule} from "@angular/material/badge";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import { SchweibmaschineComponent } from './schweibmaschine/schweibmaschine.component';
 import { MatTableModule} from "@angular/material/table";
+import { HttpClientModule } from '@angular/common/http';
+import { SideNavService } from './side-nav.service';
 
 
 @NgModule({
@@ -30,9 +32,10 @@ import { MatTableModule} from "@angular/material/table";
     MatListModule,
     MatBadgeModule,
     MatProgressBarModule,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [SideNavService],
   exports: [SideNavComponent, SchweibmaschineComponent]
 })
 export class SideNavModule { }
